@@ -1,6 +1,11 @@
 // Smart Locator Inspector - Chrome Extension Content Script
 // Adapted from the original injector.js for Chrome Extension use
 
+// Initialize when script loads
+if (!window.smartLocatorInspector) {
+  window.smartLocatorInspector = new SmartLocatorInspector();
+}
+
 class SmartLocatorInspector {
     constructor() {
         this.isActive = false;

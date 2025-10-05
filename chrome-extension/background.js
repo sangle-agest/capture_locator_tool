@@ -6,27 +6,25 @@ chrome.runtime.onInstalled.addListener(() => {
 // Handle extension icon click
 chrome.action.onClicked.addListener(async (tab) => {
   try {
-    // Inject the Smart Locator Inspector
-    await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: toggleSmartLocatorInspector
-    });
+    // Send message to content script to toggle inspector
+    await chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_INSPECTOR' });
   } catch (error) {
-    console.error('Failed to inject Smart Locator Inspector:', error);
+    console.error('Failed to toggle Smart Locator Inspector:', error);
+    // If content script not ready, inject it
+    try {
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['content.js']
+      });
+      // Try again after injection
+      setTimeout(async () => {
+        await chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_INSPECTOR' });
+      }, 100);
+    } catch (injectError) {
+      console.error('Failed to inject content script:', injectError);
+    }
   }
 });
-
-// Function to be injected into the page
-function toggleSmartLocatorInspector() {
-  // Check if inspector is already active
-  if (window.smartLocatorInspector) {
-    window.smartLocatorInspector.toggle();
-  } else {
-    // Initialize the inspector
-    window.smartLocatorInspector = new SmartLocatorInspector();
-    window.smartLocatorInspector.init();
-  }
-}
 
 // Listen for messages from content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
