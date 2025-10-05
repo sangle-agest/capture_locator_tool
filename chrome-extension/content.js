@@ -1,9 +1,14 @@
 // Smart Locator Inspector - Chrome Extension Content Script
 // Adapted from the original injector.js for Chrome Extension use
 
+console.log('Smart Locator Inspector content script loaded');
+
 // Initialize when script loads
 if (!window.smartLocatorInspector) {
+  console.log('Creating new SmartLocatorInspector instance');
   window.smartLocatorInspector = new SmartLocatorInspector();
+} else {
+  console.log('SmartLocatorInspector already exists');
 }
 
 class SmartLocatorInspector {
@@ -743,10 +748,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (!window.smartLocatorInspector) {
             window.smartLocatorInspector = new SmartLocatorInspector();
         }
+        console.log('Toggling inspector...');
         window.smartLocatorInspector.toggle();
+        console.log('Inspector active status:', window.smartLocatorInspector.isActive);
         sendResponse({ active: window.smartLocatorInspector.isActive });
     } else if (message.type === 'CHECK_STATUS') {
+        console.log('Checking status...');
         const active = window.smartLocatorInspector ? window.smartLocatorInspector.isActive : false;
+        console.log('Current status:', active);
         sendResponse({ active });
     }
 });
@@ -754,9 +763,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        // Extension will be activated via popup
+        console.log('DOM loaded, Smart Locator Inspector ready');
     });
 } else {
-    // DOM is already ready
-    // Extension will be activated via popup
+    console.log('DOM already ready, Smart Locator Inspector ready');
 }

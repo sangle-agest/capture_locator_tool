@@ -5,12 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsBtn = document.getElementById('open-settings');
   const statusDiv = document.getElementById('status');
   
+  console.log('Smart Locator Inspector popup loaded');
+  
   // Check current inspector status
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs[0]) {
+      console.log('Checking status on tab:', tabs[0].url);
       chrome.tabs.sendMessage(tabs[0].id, { type: 'CHECK_STATUS' }, (response) => {
-        if (response && response.active) {
+        console.log('Status response:', response);
+        if (chrome.runtime.lastError) {
+          console.log('No content script yet, that\'s normal');
+          updateStatus(false);
+        } else if (response && response.active) {
           updateStatus(true);
+        } else {
+          updateStatus(false);
         }
       });
     }
@@ -18,10 +27,33 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Toggle inspector
   toggleBtn.addEventListener('click', () => {
+    console.log('Toggle button clicked');
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs[0]) {
+        console.log('Sending toggle message to tab:', tabs[0].url);
         chrome.tabs.sendMessage(tabs[0].id, { type: 'TOGGLE_INSPECTOR' }, (response) => {
-          if (response) {
+          console.log('Toggle response:', response);
+          if (chrome.runtime.lastError) {
+            console.log('Error or no content script, injecting...');
+            // Content script not loaded, inject it first
+            chrome.scripting.executeScript({
+              target: { tabId: tabs[0].id },
+              files: ['content.js']
+            }).then(() => {
+              console.log('Content script injected, trying toggle again...');
+              setTimeout(() => {
+                chrome.tabs.sendMessage(tabs[0].id, { type: 'TOGGLE_INSPECTOR' }, (response) => {
+                  console.log('Second toggle response:', response);
+                  if (response) {
+                    updateStatus(response.active);
+                  }
+                });
+              }, 500);
+            }).catch(error => {
+              console.error('Failed to inject content script:', error);
+              alert('Failed to activate inspector. Please refresh the page and try again.');
+            });
+          } else if (response) {
             updateStatus(response.active);
           }
         });
@@ -36,16 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
-  // Settings button
+  // Settings button (placeholder for now)
   settingsBtn.addEventListener('click', () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, { type: 'OPEN_SETTINGS' });
-      }
-    });
+    alert('Settings panel coming soon! For now, use Ctrl+click to freeze elements and ESC to toggle.');
   });
   
   function updateStatus(isActive) {
+    console.log('Updating status to:', isActive);
     if (isActive) {
       statusDiv.textContent = 'Inspector: Active ✅';
       statusDiv.className = 'status active';
