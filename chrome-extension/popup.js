@@ -12,14 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tabs[0]) {
       console.log('Checking status on tab:', tabs[0].url);
       chrome.tabs.sendMessage(tabs[0].id, { type: 'CHECK_STATUS' }, (response) => {
-        console.log('Status response:', response);
         if (chrome.runtime.lastError) {
           console.log('No content script yet, that\'s normal');
+          // Clear the error
+          chrome.runtime.lastError;
           updateStatus(false);
-        } else if (response && response.active) {
-          updateStatus(true);
         } else {
-          updateStatus(false);
+          console.log('Status response:', response);
+          if (response && response.active) {
+            updateStatus(true);
+          } else {
+            updateStatus(false);
+          }
         }
       });
     }
@@ -35,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log('Toggle response:', response);
           if (chrome.runtime.lastError) {
             console.log('Error or no content script, injecting...');
+            // Clear the error
+            chrome.runtime.lastError;
             // Content script not loaded, inject it first
             chrome.scripting.executeScript({
               target: { tabId: tabs[0].id },
@@ -43,9 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
               console.log('Content script injected, trying toggle again...');
               setTimeout(() => {
                 chrome.tabs.sendMessage(tabs[0].id, { type: 'TOGGLE_INSPECTOR' }, (response) => {
-                  console.log('Second toggle response:', response);
-                  if (response) {
-                    updateStatus(response.active);
+                  if (chrome.runtime.lastError) {
+                    console.error('Still having issues:', chrome.runtime.lastError);
+                    chrome.runtime.lastError; // Clear error
+                    alert('Unable to activate inspector. Please refresh the page.');
+                  } else {
+                    console.log('Second toggle response:', response);
+                    if (response) {
+                      updateStatus(response.active);
+                    }
                   }
                 });
               }, 500);

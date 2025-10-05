@@ -3,14 +3,6 @@
 
 console.log('Smart Locator Inspector content script loaded');
 
-// Initialize when script loads
-if (!window.smartLocatorInspector) {
-  console.log('Creating new SmartLocatorInspector instance');
-  window.smartLocatorInspector = new SmartLocatorInspector();
-} else {
-  console.log('SmartLocatorInspector already exists');
-}
-
 class SmartLocatorInspector {
     constructor() {
         this.isActive = false;
@@ -764,7 +756,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         console.log('DOM loaded, Smart Locator Inspector ready');
+        initializeInspector();
     });
 } else {
     console.log('DOM already ready, Smart Locator Inspector ready');
+    initializeInspector();
+}
+
+// Initialize the SmartLocatorInspector instance
+function initializeInspector() {
+    if (!window.smartLocatorInspector) {
+        console.log('Creating new SmartLocatorInspector instance');
+        window.smartLocatorInspector = new SmartLocatorInspector();
+    } else {
+        console.log('SmartLocatorInspector already exists');
+    }
 }
