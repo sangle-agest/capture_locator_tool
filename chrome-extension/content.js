@@ -496,19 +496,46 @@ class SmartLocatorInspector {
     }
     
     showNotification(message) {
+        // Position notification relative to modal
+        const modalRect = this.modal ? this.modal.getBoundingClientRect() : null;
+        let notificationStyle;
+        
+        if (modalRect) {
+            // Position notification above the modal
+            notificationStyle = `
+                position: fixed;
+                left: ${modalRect.left}px;
+                top: ${Math.max(10, modalRect.top - 60)}px;
+                background: #4CAF50;
+                color: white;
+                padding: 12px 16px;
+                border-radius: 6px;
+                font-size: 14px;
+                z-index: ${this.config.zIndex + 1};
+                animation: slideIn 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            `;
+        } else {
+            // Fallback to top-left if modal not available
+            notificationStyle = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 12px 16px;
+                border-radius: 6px;
+                font-size: 14px;
+                z-index: ${this.config.zIndex + 1};
+                animation: slideIn 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            `;
+        }
+        
         const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4CAF50;
-            color: white;
-            padding: 12px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            z-index: ${this.config.zIndex + 1};
-            animation: slideIn 0.3s ease;
-        `;
+        notification.style.cssText = notificationStyle;
         notification.textContent = message;
         document.body.appendChild(notification);
         
@@ -534,8 +561,14 @@ class SmartLocatorInspector {
             startLeft = rect.left;
             startTop = rect.top;
             
+            // Add visual feedback during drag
+            this.modal.style.transition = 'none';
+            this.modal.style.cursor = 'grabbing';
+            header.style.cursor = 'grabbing';
+            
             document.addEventListener('mousemove', handleDrag);
             document.addEventListener('mouseup', stopDrag);
+            e.preventDefault();
         });
         
         const handleDrag = (e) => {
@@ -544,16 +577,54 @@ class SmartLocatorInspector {
             const deltaX = e.clientX - startX;
             const deltaY = e.clientY - startY;
             
-            this.modal.style.left = (startLeft + deltaX) + 'px';
-            this.modal.style.top = (startTop + deltaY) + 'px';
+            let newLeft = startLeft + deltaX;
+            let newTop = startTop + deltaY;
+            
+            // Keep modal within viewport bounds
+            const modalRect = this.modal.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            newLeft = Math.max(10, Math.min(newLeft, viewportWidth - modalRect.width - 10));
+            newTop = Math.max(10, Math.min(newTop, viewportHeight - modalRect.height - 10));
+            
+            this.modal.style.left = newLeft + 'px';
+            this.modal.style.top = newTop + 'px';
             this.modal.style.right = 'auto';
+            this.modal.style.transform = 'none';
         };
         
         const stopDrag = () => {
+            if (!isDragging) return;
+            
             isDragging = false;
+            
+            // Restore visual state
+            this.modal.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.modal.style.cursor = 'default';
+            header.style.cursor = 'move';
+            
+            // Optional: Snap to edges if close
+            const rect = this.modal.getBoundingClientRect();
+            const snapThreshold = 50;
+            
+            if (rect.left < snapThreshold) {
+                this.modal.style.left = '10px';
+            } else if (window.innerWidth - rect.right < snapThreshold) {
+                this.modal.style.left = (window.innerWidth - rect.width - 10) + 'px';
+            }
+            
             document.removeEventListener('mousemove', handleDrag);
             document.removeEventListener('mouseup', stopDrag);
         };
+        
+        // Add double-click to reset position
+        header.addEventListener('dblclick', () => {
+            this.modal.style.left = '20px';
+            this.modal.style.top = '50%';
+            this.modal.style.transform = 'translateY(-50%)';
+            this.modal.style.right = 'auto';
+        });
     }
     
     cleanup() {
@@ -581,10 +652,11 @@ class SmartLocatorInspector {
         return `
             .sli-modal {
                 position: fixed !important;
-                top: 20px !important;
-                right: 20px !important;
+                left: 20px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
                 width: 440px !important;
-                max-height: 85vh !important;
+                max-height: 80vh !important;
                 background: rgba(28, 28, 30, 0.95) !important;
                 border: 2px solid #007acc !important;
                 border-radius: 12px !important;
@@ -592,11 +664,12 @@ class SmartLocatorInspector {
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
                 font-size: 13px !important;
                 z-index: ${this.config.zIndex} !important;
-                box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4) !important;
+                box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
                 backdrop-filter: blur(20px) !important;
                 overflow: hidden !important;
                 pointer-events: auto !important;
                 user-select: none !important;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             }
             
             .sli-header {
@@ -608,12 +681,39 @@ class SmartLocatorInspector {
                 font-weight: 600 !important;
                 cursor: move !important;
                 border-radius: 10px 10px 0 0 !important;
+                position: relative !important;
+                transition: all 0.2s ease !important;
+            }
+            
+            .sli-header:hover {
+                background: linear-gradient(135deg, #0089e6 0%, #006bb8 100%) !important;
+                transform: translateY(-1px) !important;
+                box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3) !important;
+            }
+            
+            .sli-header:active {
+                transform: translateY(0) !important;
+                box-shadow: 0 2px 8px rgba(0, 122, 204, 0.2) !important;
+            }
+            
+            .sli-header::before {
+                content: "⋮⋮" !important;
+                position: absolute !important;
+                left: 8px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                color: rgba(255, 255, 255, 0.6) !important;
+                font-size: 14px !important;
+                line-height: 0.8 !important;
+                letter-spacing: -1px !important;
+                pointer-events: none !important;
             }
             
             .sli-title {
                 color: white !important;
                 font-size: 15px !important;
                 font-weight: 600 !important;
+                margin-left: 20px !important;
             }
             
             .sli-close {
@@ -727,8 +827,25 @@ class SmartLocatorInspector {
             }
             
             @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+                from { 
+                    transform: translateY(-20px); 
+                    opacity: 0; 
+                    scale: 0.9;
+                }
+                to { 
+                    transform: translateY(0); 
+                    opacity: 1; 
+                    scale: 1;
+                }
+            }
+            
+            @keyframes pulseGlow {
+                0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
+                50% { box-shadow: 0 0 30px rgba(255, 0, 0, 1); }
+            }
+            
+            .sli-highlight {
+                animation: pulseGlow 2s infinite;
             }
         `;
     }
