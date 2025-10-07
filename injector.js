@@ -96,7 +96,7 @@
 
     // Get comprehensive CSS styles
     function getCSS() {
-        return '.sli-modal { position: fixed !important; top: 20px !important; right: 20px !important; width: 440px !important; max-height: 85vh !important; background: rgba(28, 28, 30, 0.95) !important; border: 2px solid #007acc !important; border-radius: 12px !important; color: white !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important; font-size: 13px !important; z-index: ' + config.zIndex + ' !important; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) !important; backdrop-filter: blur(20px) !important; overflow: hidden !important; pointer-events: auto !important; user-select: none !important; transform: translateZ(0) !important; } .sli-header { background: linear-gradient(135deg, #007acc 0%, #005a9e 100%) !important; padding: 12px 16px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; font-weight: 600 !important; cursor: move !important; border-radius: 10px 10px 0 0 !important; } .sli-title { color: white !important; font-size: 15px !important; font-weight: 600 !important; } .sli-close { background: rgba(255, 255, 255, 0.1) !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; color: white !important; font-size: 16px !important; cursor: pointer !important; padding: 4px 8px !important; width: 28px !important; height: 28px !important; border-radius: 6px !important; display: flex !important; align-items: center !important; justify-content: center !important; transition: all 0.2s ease !important; } .sli-close:hover { background: rgba(255, 255, 255, 0.2) !important; border-color: rgba(255, 255, 255, 0.4) !important; transform: scale(1.1) !important; } .sli-content { padding: 16px !important; max-height: calc(85vh - 60px) !important; overflow-y: auto !important; } .sli-content::-webkit-scrollbar { width: 6px !important; } .sli-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1) !important; border-radius: 3px !important; } .sli-content::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3) !important; border-radius: 3px !important; } .sli-field { margin-bottom: 10px !important; padding: 10px 12px !important; background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 8px !important; cursor: pointer !important; transition: all 0.2s ease !important; position: relative !important; } .sli-field:hover { background: rgba(0, 122, 204, 0.2) !important; border-color: #007acc !important; transform: translateY(-1px) !important; } .sli-smart-xpath { border-left: 4px solid #61dafb !important; } .sli-smart-xpath:hover { border-left-color: #007acc !important; } .sli-unique { border-left-color: #98c379 !important; } .sli-unique:hover { border-left-color: #27ae60 !important; } .sli-non-unique { border-left-color: #e5c07b !important; } .sli-non-unique:hover { border-left-color: #f39c12 !important; } .sli-field-header { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; margin-bottom: 6px !important; } .sli-field-label { color: #61dafb !important; font-weight: 600 !important; font-size: 12px !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; flex: 1 !important; } .sli-score-container { display: flex !important; flex-direction: column !important; align-items: flex-end !important; min-width: 90px !important; } .sli-uniqueness { font-weight: 600 !important; font-size: 10px !important; margin-bottom: 2px !important; text-transform: uppercase !important; } .sli-score { font-weight: 700 !important; font-size: 11px !important; margin-bottom: 2px !important; } .sli-score-bar { font-family: monospace !important; font-size: 8px !important; line-height: 1 !important; opacity: 0.7 !important; } .sli-field-description { color: #98c379 !important; font-size: 11px !important; font-style: italic !important; margin-bottom: 6px !important; opacity: 0.9 !important; } .sli-field-value { color: #f8f8f2 !important; word-break: break-all !important; font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace !important; font-size: 11px !important; line-height: 1.4 !important; background: rgba(0, 0, 0, 0.2) !important; padding: 6px 8px !important; border-radius: 4px !important; } .sli-xpath-header { color: #e5c07b !important; font-weight: 700 !important; font-size: 13px !important; margin: 16px 0 8px 0 !important; padding: 8px 12px !important; background: rgba(229, 192, 123, 0.1) !important; border-radius: 6px !important; border-left: 4px solid #e5c07b !important; } .sli-instruction { color: #98c379 !important; font-size: 11px !important; margin-bottom: 6px !important; padding: 4px 8px !important; background: rgba(152, 195, 121, 0.1) !important; border-radius: 4px !important; border-left: 3px solid #98c379 !important; } .sli-message { color: #61dafb !important; font-weight: 600 !important; text-align: center !important; padding: 16px !important; font-size: 14px !important; } .sli-loading { color: #98c379 !important; text-align: center !important; padding: 24px !important; font-style: italic !important; font-size: 14px !important; } .sli-frozen { border-color: #e06c75 !important; box-shadow: 0 0 20px rgba(224, 108, 117, 0.4) !important; } .sli-frozen .sli-header { background: linear-gradient(135deg, #e06c75 0%, #c94a4a 100%) !important; } .sli-highlight { position: fixed !important; top: 0 !important; left: 0 !important; width: 0 !important; height: 0 !important; pointer-events: none !important; z-index: 999999999 !important; border: 4px solid #FF0000 !important; background: rgba(255, 0, 0, 0.2) !important; box-shadow: 0 0 20px rgba(255, 0, 0, 0.8) !important; display: none !important; opacity: 0.8 !important; border-radius: 0 !important; } .sli-highlight.frozen { border-color: #00FF00 !important; background: rgba(0, 255, 0, 0.2) !important; box-shadow: 0 0 20px rgba(0, 255, 0, 0.8) !important; } .sli-hierarchy-container { margin-top: 16px !important; padding: 12px !important; background: rgba(255, 255, 255, 0.05) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; border-radius: 8px !important; border-left: 4px solid #c678dd !important; } .sli-hierarchy-header { color: #c678dd !important; font-weight: 700 !important; font-size: 13px !important; margin-bottom: 12px !important; padding: 8px 12px !important; background: rgba(198, 120, 221, 0.1) !important; border-radius: 6px !important; display: flex !important; align-items: center !important; } .sli-hierarchy-tree { font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace !important; font-size: 11px !important; line-height: 1.6 !important; } .sli-hierarchy-item { padding: 2px 8px !important; margin-bottom: 1px !important; background: rgba(0, 0, 0, 0.1) !important; border-radius: 3px !important; cursor: pointer !important; transition: all 0.2s ease !important; position: relative !important; white-space: pre !important; overflow-x: auto !important; } .sli-hierarchy-item:hover { background: rgba(0, 122, 204, 0.2) !important; transform: translateX(2px) !important; } .sli-hierarchy-item.current { background: rgba(152, 195, 121, 0.2) !important; border: 1px solid #98c379 !important; font-weight: 600 !important; color: #98c379 !important; } .sli-tree-line { color: #f8f8f2 !important; } .sli-hierarchy-item.current .sli-tree-line { color: #98c379 !important; } .sli-hierarchy-highlight { border: 2px solid #c678dd !important; background: rgba(198, 120, 221, 0.3) !important; box-shadow: 0 0 12px rgba(198, 120, 221, 0.6) !important; }';
+        return '.sli-modal { position: fixed !important; top: 20px !important; right: 20px !important; width: 440px !important; max-height: 85vh !important; background: rgba(28, 28, 30, 0.95) !important; border: 2px solid #007acc !important; border-radius: 12px !important; color: white !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important; font-size: 13px !important; z-index: ' + config.zIndex + ' !important; box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) !important; backdrop-filter: blur(20px) !important; overflow: hidden !important; pointer-events: auto !important; user-select: none !important; transform: translateZ(0) !important; } .sli-header { background: linear-gradient(135deg, #007acc 0%, #005a9e 100%) !important; padding: 12px 16px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; font-weight: 600 !important; cursor: move !important; border-radius: 10px 10px 0 0 !important; } .sli-title { color: white !important; font-size: 15px !important; font-weight: 600 !important; } .sli-close { background: rgba(255, 255, 255, 0.1) !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; color: white !important; font-size: 16px !important; cursor: pointer !important; padding: 4px 8px !important; width: 28px !important; height: 28px !important; border-radius: 6px !important; display: flex !important; align-items: center !important; justify-content: center !important; transition: all 0.2s ease !important; } .sli-close:hover { background: rgba(255, 255, 255, 0.2) !important; border-color: rgba(255, 255, 255, 0.4) !important; transform: scale(1.1) !important; } .sli-content { padding: 16px !important; max-height: calc(85vh - 60px) !important; overflow-y: auto !important; } .sli-content::-webkit-scrollbar { width: 6px !important; } .sli-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1) !important; border-radius: 3px !important; } .sli-content::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3) !important; border-radius: 3px !important; } .sli-field { margin-bottom: 10px !important; padding: 10px 12px !important; background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 8px !important; cursor: pointer !important; transition: all 0.2s ease !important; position: relative !important; } .sli-field:hover { background: rgba(0, 122, 204, 0.2) !important; border-color: #007acc !important; transform: translateY(-1px) !important; } .sli-smart-xpath { border-left: 4px solid #61dafb !important; } .sli-smart-xpath:hover { border-left-color: #007acc !important; } .sli-table-xpath { border-left: 4px solid #ff9500 !important; background: rgba(255, 149, 0, 0.05) !important; } .sli-table-xpath:hover { border-left-color: #ff7700 !important; background: rgba(255, 149, 0, 0.15) !important; } .sli-unique { border-left-color: #98c379 !important; } .sli-unique:hover { border-left-color: #27ae60 !important; } .sli-non-unique { border-left-color: #e5c07b !important; } .sli-non-unique:hover { border-left-color: #f39c12 !important; } .sli-field-header { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; margin-bottom: 6px !important; } .sli-field-label { color: #61dafb !important; font-weight: 600 !important; font-size: 12px !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; flex: 1 !important; } .sli-score-container { display: flex !important; flex-direction: column !important; align-items: flex-end !important; min-width: 90px !important; } .sli-uniqueness { font-weight: 600 !important; font-size: 10px !important; margin-bottom: 2px !important; text-transform: uppercase !important; } .sli-score { font-weight: 700 !important; font-size: 11px !important; margin-bottom: 2px !important; } .sli-score-bar { font-family: monospace !important; font-size: 8px !important; line-height: 1 !important; opacity: 0.7 !important; } .sli-field-description { color: #98c379 !important; font-size: 11px !important; font-style: italic !important; margin-bottom: 6px !important; opacity: 0.9 !important; } .sli-field-value { color: #f8f8f2 !important; word-break: break-all !important; font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace !important; font-size: 11px !important; line-height: 1.4 !important; background: rgba(0, 0, 0, 0.2) !important; padding: 6px 8px !important; border-radius: 4px !important; } .sli-xpath-header { color: #e5c07b !important; font-weight: 700 !important; font-size: 13px !important; margin: 16px 0 8px 0 !important; padding: 8px 12px !important; background: rgba(229, 192, 123, 0.1) !important; border-radius: 6px !important; border-left: 4px solid #e5c07b !important; } .sli-instruction { color: #98c379 !important; font-size: 11px !important; margin-bottom: 6px !important; padding: 4px 8px !important; background: rgba(152, 195, 121, 0.1) !important; border-radius: 4px !important; border-left: 3px solid #98c379 !important; } .sli-message { color: #61dafb !important; font-weight: 600 !important; text-align: center !important; padding: 16px !important; font-size: 14px !important; } .sli-loading { color: #98c379 !important; text-align: center !important; padding: 24px !important; font-style: italic !important; font-size: 14px !important; } .sli-frozen { border-color: #e06c75 !important; box-shadow: 0 0 20px rgba(224, 108, 117, 0.4) !important; } .sli-frozen .sli-header { background: linear-gradient(135deg, #e06c75 0%, #c94a4a 100%) !important; } .sli-highlight { position: fixed !important; top: 0 !important; left: 0 !important; width: 0 !important; height: 0 !important; pointer-events: none !important; z-index: 999999999 !important; border: 4px solid #FF0000 !important; background: rgba(255, 0, 0, 0.2) !important; box-shadow: 0 0 20px rgba(255, 0, 0, 0.8) !important; display: none !important; opacity: 0.8 !important; border-radius: 0 !important; } .sli-highlight.frozen { border-color: #00FF00 !important; background: rgba(0, 255, 0, 0.2) !important; box-shadow: 0 0 20px rgba(0, 255, 0, 0.8) !important; } .sli-hierarchy-container { margin-top: 16px !important; padding: 12px !important; background: rgba(255, 255, 255, 0.05) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; border-radius: 8px !important; border-left: 4px solid #c678dd !important; } .sli-hierarchy-header { color: #c678dd !important; font-weight: 700 !important; font-size: 13px !important; margin-bottom: 12px !important; padding: 8px 12px !important; background: rgba(198, 120, 221, 0.1) !important; border-radius: 6px !important; display: flex !important; align-items: center !important; } .sli-hierarchy-tree { font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace !important; font-size: 11px !important; line-height: 1.6 !important; } .sli-hierarchy-item { padding: 2px 8px !important; margin-bottom: 1px !important; background: rgba(0, 0, 0, 0.1) !important; border-radius: 3px !important; cursor: pointer !important; transition: all 0.2s ease !important; position: relative !important; white-space: pre !important; overflow-x: auto !important; } .sli-hierarchy-item:hover { background: rgba(0, 122, 204, 0.2) !important; transform: translateX(2px) !important; } .sli-hierarchy-item.current { background: rgba(152, 195, 121, 0.2) !important; border: 1px solid #98c379 !important; font-weight: 600 !important; color: #98c379 !important; } .sli-tree-line { color: #f8f8f2 !important; } .sli-hierarchy-item.current .sli-tree-line { color: #98c379 !important; } .sli-hierarchy-highlight { border: 2px solid #c678dd !important; background: rgba(198, 120, 221, 0.3) !important; box-shadow: 0 0 12px rgba(198, 120, 221, 0.6) !important; }';
     }
 
     // Create the highlight box
@@ -692,6 +692,10 @@
         const dynamicXPaths = generateDynamicXPaths(element);
         xpaths.push(...dynamicXPaths);
         
+        // Strategy 6: Table-specific locators (NEW!)
+        const tableXPaths = generateTableSpecificXPaths(element);
+        xpaths.push(...tableXPaths);
+        
         // Validate uniqueness and enhance XPaths
         const enhancedXPaths = [];
         
@@ -1016,6 +1020,326 @@
         return xpaths;
     }
 
+    // Generate table-specific XPath locators
+    function generateTableSpecificXPaths(element) {
+        const xpaths = [];
+        
+        // Check if element is table-related
+        const tableContext = getTableContext(element);
+        if (!tableContext.isTableRelated) {
+            return xpaths;
+        }
+        
+        // Generate different types of table-specific XPaths
+        if (tableContext.type === 'cell') {
+            // For TD/TH elements, generate content-based and position-based XPaths
+            const cellXPaths = generateCellBasedXPaths(element, tableContext);
+            xpaths.push(...cellXPaths);
+            
+            // Generate row-based XPaths using sibling cell values
+            const rowXPaths = generateRowBasedXPaths(element, tableContext);
+            xpaths.push(...rowXPaths);
+            
+            // Generate column-based XPaths using header information
+            const columnXPaths = generateColumnBasedXPaths(element, tableContext);
+            xpaths.push(...columnXPaths);
+        }
+        
+        if (tableContext.type === 'row') {
+            // For TR elements, generate row-content based XPaths
+            const rowContentXPaths = generateRowContentXPaths(element, tableContext);
+            xpaths.push(...rowContentXPaths);
+        }
+        
+        if (tableContext.type === 'table') {
+            // For TABLE elements, generate table-wide XPaths
+            const tableWideXPaths = generateTableWideXPaths(element, tableContext);
+            xpaths.push(...tableWideXPaths);
+        }
+        
+        return xpaths;
+    }
+
+    // Determine if element is table-related and gather context
+    function getTableContext(element) {
+        const tagName = element.tagName.toLowerCase();
+        let tableContext = {
+            isTableRelated: false,
+            type: null,
+            table: null,
+            row: null,
+            columnIndex: -1,
+            headers: []
+        };
+        
+        // Direct table elements
+        if (tagName === 'table') {
+            tableContext.isTableRelated = true;
+            tableContext.type = 'table';
+            tableContext.table = element;
+        } else if (tagName === 'tr') {
+            tableContext.isTableRelated = true;
+            tableContext.type = 'row';
+            tableContext.row = element;
+            tableContext.table = element.closest('table');
+        } else if (tagName === 'td' || tagName === 'th') {
+            tableContext.isTableRelated = true;
+            tableContext.type = 'cell';
+            tableContext.row = element.closest('tr');
+            tableContext.table = element.closest('table');
+            
+            // Calculate column index
+            if (tableContext.row) {
+                const cells = Array.from(tableContext.row.children);
+                tableContext.columnIndex = cells.indexOf(element);
+            }
+        }
+        
+        // Elements inside table cells
+        if (!tableContext.isTableRelated) {
+            const parentCell = element.closest('td, th');
+            if (parentCell) {
+                tableContext.isTableRelated = true;
+                tableContext.type = 'cell-content';
+                tableContext.cell = parentCell;
+                tableContext.row = parentCell.closest('tr');
+                tableContext.table = parentCell.closest('table');
+                
+                // Calculate column index
+                if (tableContext.row) {
+                    const cells = Array.from(tableContext.row.children);
+                    tableContext.columnIndex = cells.indexOf(parentCell);
+                }
+            }
+        }
+        
+        // Get table headers for context
+        if (tableContext.table) {
+            tableContext.headers = getTableHeaders(tableContext.table);
+        }
+        
+        return tableContext;
+    }
+
+    // Get table headers
+    function getTableHeaders(table) {
+        const headers = [];
+        
+        // Look for thead th elements
+        const theadHeaders = table.querySelectorAll('thead th');
+        if (theadHeaders.length > 0) {
+            theadHeaders.forEach(th => {
+                headers.push({
+                    text: th.textContent.trim(),
+                    element: th
+                });
+            });
+        } else {
+            // Look for first row th elements
+            const firstRowHeaders = table.querySelectorAll('tr:first-child th');
+            if (firstRowHeaders.length > 0) {
+                firstRowHeaders.forEach(th => {
+                    headers.push({
+                        text: th.textContent.trim(),
+                        element: th
+                    });
+                });
+            } else {
+                // Use first row td elements as headers
+                const firstRowCells = table.querySelectorAll('tr:first-child td');
+                firstRowCells.forEach(td => {
+                    headers.push({
+                        text: td.textContent.trim(),
+                        element: td
+                    });
+                });
+            }
+        }
+        
+        return headers;
+    }
+
+    // Generate cell-based XPaths
+    function generateCellBasedXPaths(element, tableContext) {
+        const xpaths = [];
+        const cellText = element.textContent.trim();
+        
+        // XPath by cell content
+        if (cellText && cellText.length > 0 && cellText.length < 50) {
+            xpaths.push({
+                xpath: `//td[normalize-space(text())="${cellText}"]`,
+                score: 85,
+                type: 'Table Cell Content',
+                description: `Find cell containing "${cellText}"`
+            });
+            
+            // More flexible text matching
+            xpaths.push({
+                xpath: `//td[contains(normalize-space(text()), "${cellText}")]`,
+                score: 80,
+                type: 'Table Cell Partial',
+                description: `Find cell containing text "${cellText}"`
+            });
+        }
+        
+        // XPath by column position
+        if (tableContext.columnIndex >= 0) {
+            const columnPos = tableContext.columnIndex + 1;
+            xpaths.push({
+                xpath: `//tr/td[${columnPos}]`,
+                score: 75,
+                type: 'Table Column Position',
+                description: `Column ${columnPos} cells`
+            });
+        }
+        
+        return xpaths;
+    }
+
+    // Generate row-based XPaths using sibling cell values
+    function generateRowBasedXPaths(element, tableContext) {
+        const xpaths = [];
+        
+        if (!tableContext.row) return xpaths;
+        
+        const cells = Array.from(tableContext.row.children);
+        const targetColumnIndex = tableContext.columnIndex;
+        
+        // Generate XPaths based on other cells in the same row
+        cells.forEach((cell, index) => {
+            const cellText = cell.textContent.trim();
+            if (cellText && cellText.length > 0 && cellText.length < 50 && index !== targetColumnIndex) {
+                // Find target cell by referencing sibling cell content
+                const direction = index < targetColumnIndex ? 'following-sibling' : 'preceding-sibling';
+                const siblingCount = Math.abs(targetColumnIndex - index);
+                
+                xpaths.push({
+                    xpath: `//td[normalize-space(text())="${cellText}"]/${direction}::td[${siblingCount}]`,
+                    score: 90,
+                    type: 'Table Row Context',
+                    description: `Based on row containing "${cellText}"`
+                });
+                
+                // Alternative: using parent row
+                xpaths.push({
+                    xpath: `//tr[td[normalize-space(text())="${cellText}"]]/td[${targetColumnIndex + 1}]`,
+                    score: 88,
+                    type: 'Table Row Reference',
+                    description: `Column ${targetColumnIndex + 1} in row with "${cellText}"`
+                });
+            }
+        });
+        
+        return xpaths;
+    }
+
+    // Generate column-based XPaths using header information
+    function generateColumnBasedXPaths(element, tableContext) {
+        const xpaths = [];
+        
+        if (!tableContext.headers || tableContext.columnIndex < 0) return xpaths;
+        
+        const header = tableContext.headers[tableContext.columnIndex];
+        if (!header || !header.text) return xpaths;
+        
+        const headerText = header.text;
+        const columnPos = tableContext.columnIndex + 1;
+        
+        // XPath using header text to identify column
+        xpaths.push({
+            xpath: `//table//th[normalize-space(text())="${headerText}"]/ancestor::table//tr/td[${columnPos}]`,
+            score: 92,
+            type: 'Table Header Column',
+            description: `"${headerText}" column cells`
+        });
+        
+        // More specific: find specific row by combining header and row content
+        const rowCells = Array.from(tableContext.row.children);
+        rowCells.forEach((cell, index) => {
+            const cellText = cell.textContent.trim();
+            if (cellText && cellText.length > 0 && cellText.length < 50 && index !== tableContext.columnIndex) {
+                const otherColumnHeader = tableContext.headers[index];
+                if (otherColumnHeader && otherColumnHeader.text) {
+                    xpaths.push({
+                        xpath: `//table[.//th[normalize-space(text())="${headerText}"]]//tr[td[normalize-space(text())="${cellText}"]]/td[${columnPos}]`,
+                        score: 95,
+                        type: 'Table Coordinate',
+                        description: `"${headerText}" column where "${otherColumnHeader.text}" = "${cellText}"`
+                    });
+                }
+            }
+        });
+        
+        return xpaths;
+    }
+
+    // Generate row content-based XPaths
+    function generateRowContentXPaths(element, tableContext) {
+        const xpaths = [];
+        
+        const cells = Array.from(element.children);
+        
+        // Generate XPath based on multiple cell contents
+        const cellTexts = cells.map(cell => cell.textContent.trim()).filter(text => text && text.length < 30);
+        
+        if (cellTexts.length >= 2) {
+            // Use first two significant cell contents
+            const firstText = cellTexts[0];
+            const secondText = cellTexts[1];
+            
+            xpaths.push({
+                xpath: `//tr[td[normalize-space(text())="${firstText}"] and td[normalize-space(text())="${secondText}"]]`,
+                score: 93,
+                type: 'Table Row Multi-Content',
+                description: `Row containing "${firstText}" and "${secondText}"`
+            });
+        }
+        
+        if (cellTexts.length >= 1) {
+            const firstText = cellTexts[0];
+            xpaths.push({
+                xpath: `//tr[td[normalize-space(text())="${firstText}"]]`,
+                score: 85,
+                type: 'Table Row Content',
+                description: `Row containing "${firstText}"`
+            });
+        }
+        
+        return xpaths;
+    }
+
+    // Generate table-wide XPaths
+    function generateTableWideXPaths(element, tableContext) {
+        const xpaths = [];
+        
+        // Generate XPath based on table attributes
+        if (element.className) {
+            xpaths.push({
+                xpath: `//table[@class="${element.className}"]`,
+                score: 80,
+                type: 'Table Class',
+                description: `Table with class "${element.className}"`
+            });
+        }
+        
+        // Generate XPath based on table headers
+        if (tableContext.headers.length > 0) {
+            const firstHeader = tableContext.headers[0].text;
+            const lastHeader = tableContext.headers[tableContext.headers.length - 1].text;
+            
+            if (firstHeader && lastHeader && firstHeader !== lastHeader) {
+                xpaths.push({
+                    xpath: `//table[.//th[normalize-space(text())="${firstHeader}"] and .//th[normalize-space(text())="${lastHeader}"]]`,
+                    score: 88,
+                    type: 'Table Headers',
+                    description: `Table with headers "${firstHeader}" to "${lastHeader}"`
+                });
+            }
+        }
+        
+        return xpaths;
+    }
+
     // Helper function to find associated label
     function findAssociatedLabel(element) {
         // Check for explicit label association
@@ -1064,7 +1388,7 @@
         const parentClasses = parent.className.toLowerCase();
         if (parentClasses.includes('list') || parentClasses.includes('table') || parentClasses.includes('row')) {
             return {
-                xpath: '//*[contains(@class, "' + parent.className.split(' ')[0] + '")]/' + element.tagName.toLowerCase() + '[%s]',
+                xpath: '//*[contains(@class, "' + parent.className.split(' ')[0] + '")]/' + element.tagName.toLowerCase() + '[' + index + ']',
                 index: index
             };
         }
@@ -1379,9 +1703,17 @@
         const uniquenessClass = isUnique ? 'sli-unique' : 'sli-non-unique';
         const uniquenessInfo = isUnique ? 'Unique' : matchCount + ' matches';
         
-        return '<div class="sli-field sli-smart-xpath ' + uniquenessClass + '" onclick="window.SLI.copyToClipboard(\'' + escapedXPath + '\')">' +
+        // Add special styling for table-related XPaths
+        let tableIcon = '';
+        let tableClass = '';
+        if (type && (type.includes('Table') || type.includes('Cell') || type.includes('Row') || type.includes('Column'))) {
+            tableIcon = '📊 ';
+            tableClass = ' sli-table-xpath';
+        }
+        
+        return '<div class="sli-field sli-smart-xpath ' + uniquenessClass + tableClass + '" onclick="window.SLI.copyToClipboard(\'' + escapedXPath + '\')">' +
             '<div class="sli-field-header">' +
-                '<div class="sli-field-label">' + uniquenessIcon + ' ' + label + ' - ' + type + '</div>' +
+                '<div class="sli-field-label">' + tableIcon + uniquenessIcon + ' ' + label + ' - ' + type + '</div>' +
                 '<div class="sli-score-container">' +
                     '<div class="sli-uniqueness" style="color: ' + (isUnique ? '#98c379' : '#e5c07b') + '">' + uniquenessInfo + '</div>' +
                     '<div class="sli-score" style="color: ' + scoreColor + '">' + score + '/100</div>' +
